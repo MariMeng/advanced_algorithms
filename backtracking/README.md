@@ -31,6 +31,32 @@ The algorithm uses **Backtracking** to explore possible paths. Unlike pure brute
 * **Compiler:** GCC/G++
 * **Concepts:** Recursion, Backtracking, Matrix Manipulation.
 
+## Versão Visual (Raylib) / Visual Version (Raylib)
+
+**PT-BR:**
+Além da lógica pura, este projeto inclui uma implementação visual utilizando a biblioteca **Raylib**. Esta versão permite observar o "passo a passo" do Backtracking:
+* **Verde:** Representa o caminho atual sendo explorado pela recursão.
+* **Branco:** Representa células que foram descartadas (Backtracked) após o algoritmo perceber que não levavam à solução.
+
+
+**EN-US:**
+Beyond pure logic, this project includes a visual implementation using the **Raylib** library. This version allows observing the Backtracking "step-by-step":
+* **Green:** Represents the current path being explored by recursion.
+* **White:** Represents cells that were discarded (Backtracked) after the algorithm realized they did not lead to a solution.
+
+
+
+## Compilação e Dependências (Linux Mint) / Compilation & Dependencies
+
+**PT-BR:** Para rodar a versão visual, é necessário ter a Raylib instalada. Recomendamos a compilação via terminal:
+**EN-US:** To run the visual version, Raylib must be installed. We recommend compiling via terminal:
+
+```bash
+# Compilação / Compilation
+g++ visual.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o visual_search
+
+# Execução / Execution
+./visual_search
 
 ## Como usar / How to use
 
@@ -43,3 +69,4 @@ vector<string> mat = {
 };
 
 string target = "ABCCED"; // Palavra a ser buscada / Target word
+
