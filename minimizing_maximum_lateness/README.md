@@ -4,35 +4,37 @@ Este diretório contém uma implementação em C++ do problema da **Minimizaçã
 
 ## O Problema
 
-Dado um conjunto de $n$ tarefas $J_1, J_2, \ldots, J_n$ que devem ser executadas em um único recurso (máquina, processador ou servidor), cada tarefa $i$ possui:
+Dado um conjunto de **n** tarefas que devem ser executadas em um único recurso (máquina, processador ou servidor), cada tarefa **i** possui:
 
-- Um **tempo de processamento** $t_i$
-- Um **prazo final (deadline)** $d_i$
+- Um **tempo de processamento** `t`
+- Um **prazo final (deadline)** `d`
 
-Se a tarefa $i$ começa no instante $s_i$, ela termina em $f_i = s_i + t_i$. O **atraso** da tarefa é definido como:
+Se a tarefa começa no instante `s`, ela termina em `f = s + t`. O **atraso** da tarefa é definido como:
 
-$$\ell_i = \max(0,\ f_i - d_i)$$
+```
+lateness = max(0, f - d)
+```
 
-O objetivo é escalonar todas as tarefas em uma ordem tal que o **atraso máximo** $L^* = \max_i\ \ell_i$ seja minimizado.
+O objetivo é escalonar todas as tarefas em uma ordem tal que o **atraso máximo** `L* = max(lateness)` seja minimizado.
 
 ## Algoritmo Guloso — EDF
 
 A intuição é simples: tarefas com prazo mais apertado devem ser executadas primeiro. Os passos são:
 
-1. Ordenar as tarefas em ordem não-decrescente de deadline ($d_1 \leq d_2 \leq \ldots \leq d_n$)
+1. Ordenar as tarefas em ordem não-decrescente de deadline
 2. Inicializar o tempo corrente e o atraso máximo em zero
 3. Para cada tarefa nessa ordem, agendá-la imediatamente após a anterior
-4. Calcular $f_i = \text{tempo\_corrente} + t_i$ e $\ell_i = \max(0, f_i - d_i)$
+4. Calcular o término `f = tempo_corrente + t` e o atraso `lateness = max(0, f - d)`
 5. Atualizar o atraso máximo
 
-A otimalidade do EDF é provada por **argumento de troca (exchange argument)**: qualquer inversão na ordem pode ser corrigida sem piorar o atraso máximo.
+A otimalidade do EDF é provada por **argumento de troca (exchange argument)**: qualquer inversão na ordem pode ser corrigida sem aumentar o atraso máximo.
 
 ## Análise de Complexidade
 
 | | |
 |---|---|
-| **Tempo** | $O(n \log n)$ — dominado pela ordenação inicial |
-| **Espaço** | $O(n)$ — para armazenar a permutação ordenada |
+| **Tempo** | O(n log n) — dominado pela ordenação inicial |
+| **Espaço** | O(n) — para armazenar a permutação ordenada |
 
 ## Visualização Interativa
 
@@ -41,15 +43,15 @@ A cada execução, o programa gera aleatoriamente entre 10 e 15 tarefas com dura
 - As tarefas são colocadas uma a uma na linha do tempo
 - Marcadores de deadline são exibidos (verde = no prazo, vermelho = em atraso)
 - Colchetes de atraso são desenhados abaixo do Gantt para cada tarefa atrasada
-- A tabela lateral atualiza $f_i$ e $\ell_i$ conforme o escalonamento avança
+- A tabela lateral atualiza o término e o atraso de cada tarefa conforme o escalonamento avança
 
 **Controles:**
 
-| Tecla | Ação |
+| Tecla | Acao |
 |-------|------|
 | `SPACE` | Pausar / retomar |
-| `→` / `←` | Avançar / recuar um passo |
-| `↑` / `↓` | Aumentar / diminuir velocidade |
+| `< >` | Avançar / recuar um passo |
+| `^ v` | Aumentar / diminuir velocidade |
 | `R` | Gerar nova instância aleatória |
 
 ## Compilação e Execução
