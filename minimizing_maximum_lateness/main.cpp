@@ -118,7 +118,7 @@ int main() {
         const int TABLE_X = 14;
         const int TABLE_W = 330;
         const int GANTT_X = TABLE_X + TABLE_W + 18;
-        const int GANTT_Y = 110;
+        const int GANTT_Y = 160;
         const int GANTT_W = W - GANTT_X - 14;
         const int GANTT_H = 74;
         const int ROW_H   = std::max(22, (H - 210) / (g_n + 1));
@@ -205,9 +205,9 @@ int main() {
             DrawRectangleLines(bx, GANTT_Y, bw, GANTT_H, {0, 0, 0, 160});
 
             snprintf(buf, sizeof(buf), "J%d", job.id);
-            int tw = msr(buf, 13);
+            int tw = msr(buf, 15);
             if (bw >= tw + 6)
-                txt(buf, bx + (bw - tw)/2, GANTT_Y + GANTT_H/2 - 7, 13, {0, 0, 0, 220});
+                txt(buf, bx + (bw - tw)/2, GANTT_Y + GANTT_H/2 - 8, 15, {0, 0, 0, 220});
         }
 
         // Pulsing outline on current bar
@@ -238,14 +238,14 @@ int main() {
             Color dc = job.lateness > 0 ? (Color){255, 80,  80, 255}
                                         : (Color){ 80, 255, 120, 255};
 
-            DrawLine(dx, GANTT_Y - 22, dx, GANTT_Y + GANTT_H, dc);
-            DrawTriangle({(float)dx,     (float)(GANTT_Y - 6)},
-                         {(float)(dx-5), (float)(GANTT_Y - 22)},
-                         {(float)(dx+5), (float)(GANTT_Y - 22)}, dc);
+            DrawLine(dx, GANTT_Y - 30, dx, GANTT_Y + GANTT_H, dc);
+            DrawTriangle({(float)dx,     (float)(GANTT_Y - 10)},
+                         {(float)(dx-6), (float)(GANTT_Y - 30)},
+                         {(float)(dx+6), (float)(GANTT_Y - 30)}, dc);
 
-            int labelY = GANTT_Y - 38 - (i % 3) * 13;
+            int labelY = GANTT_Y - 58 - (i % 3) * 24;
             snprintf(buf, sizeof(buf), "d%d=%d", job.id, job.deadline);
-            txt(buf, dx - 8, labelY, 10, dc);
+            txt(buf, dx - 8, labelY, 18, dc);
         }
 
         // Lateness brackets
@@ -265,9 +265,9 @@ int main() {
                 DrawLine(x2, by-4, x2, by+4, {255, 80, 80, 255});
 
                 snprintf(buf, sizeof(buf), "l%d=%d", job.id, job.lateness);
-                int tw = msr(buf, 11);
+                int tw = msr(buf, 18);
                 if (x2 - x1 > 6)
-                    txt(buf, (x1+x2)/2 - tw/2, by+5, 11, {255, 130, 130, 255});
+                    txt(buf, (x1+x2)/2 - tw/2, by+5, 18, {255, 130, 130, 255});
             }
         }
 
